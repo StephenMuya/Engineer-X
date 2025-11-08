@@ -1,0 +1,21 @@
+{
+  "name": "engineerx.json",
+  "version": "1.0.0",
+  "description": "Backend files for Engineer X project. ",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm run dev "
+  },
+  "repository": {
+    "type": "git",
+    "url": "EngineerX"
+  },
+  "keywords": [
+    "Mutheu@2020"
+  ],
+  "author": "Stephen Mutheu Muya",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
