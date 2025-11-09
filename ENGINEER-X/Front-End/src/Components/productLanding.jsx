@@ -4,9 +4,6 @@ import { Menu, X, ArrowRight, Github, Linkedin, Twitter, Mail, BookOpen, Code, C
 const ProductLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'signin', 'signup'
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,252 +63,18 @@ const ProductLanding = () => {
   ];
 
   // Sign In Page
-  const SignInPage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-4 py-20">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <div className="bg-gradient-to-r from-cyan-500 to-purple-500 p-3 rounded-lg">
-              <Cpu className="w-8 h-8 text-white" />
-            </div>
-            <span className="text-3xl font-bold text-white">Engineer<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">X</span></span>
-          </div>
-          <h2 className="text-4xl font-bold text-white mb-2">Welcome Back</h2>
-          <p className="text-gray-400">Sign in to continue your learning journey</p>
-        </div>
-
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8">
-          <form className="space-y-6">
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="your.email@example.com"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Password</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="w-4 h-4 rounded border-white/20 bg-white/10 text-cyan-500 focus:ring-cyan-500" />
-                <span className="ml-2 text-sm text-gray-400">Remember me</span>
-              </label>
-              <a href="#" className="text-sm text-cyan-400 hover:text-cyan-300">Forgot password?</a>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105"
-            >
-              Sign In
-            </button>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-slate-900/50 text-gray-400">Or continue with</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Github className="w-5 h-5 text-white" />
-              </button>
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Mail className="w-5 h-5 text-white" />
-              </button>
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Linkedin className="w-5 h-5 text-white" />
-              </button>
-            </div>
-          </div>
-
-          <p className="text-center text-gray-400 text-sm mt-6">
-            Don't have an account?{' '}
-            <button onClick={() => setCurrentPage('signup')} className="text-cyan-400 hover:text-cyan-300 font-semibold">
-              Sign up
-            </button>
-          </p>
-        </div>
-
-        <button
-          onClick={() => setCurrentPage('landing')}
-          className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto"
-        >
-          ← Back to home
-        </button>
-      </div>
-    </div>
-  );
-
+  
   // Sign Up Page
-  const SignUpPage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-4 py-20">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <div className="bg-gradient-to-r from-cyan-500 to-purple-500 p-3 rounded-lg">
-              <Cpu className="w-8 h-8 text-white" />
-            </div>
-            <span className="text-3xl font-bold text-white">Engineer<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">X</span></span>
-          </div>
-          <h2 className="text-4xl font-bold text-white mb-2">Create Account</h2>
-          <p className="text-gray-400">Join 50,000+ engineers leveling up their skills</p>
-        </div>
-
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8">
-          <form className="space-y-6">
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Full Name</label>
-              <input
-                type="text"
-                placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="your.email@example.com"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Password</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Create a strong password"
-                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-semibold mb-2">Confirm Password</label>
-              <div className="relative">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm your password"
-                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                >
-                  {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <input type="checkbox" className="w-4 h-4 rounded border-white/20 bg-white/10 text-cyan-500 focus:ring-cyan-500 mt-1" />
-              <span className="ml-2 text-sm text-gray-400">
-                I agree to the{' '}
-                <a href="#" className="text-cyan-400 hover:text-cyan-300">Terms of Service</a>
-                {' '}and{' '}
-                <a href="#" className="text-cyan-400 hover:text-cyan-300">Privacy Policy</a>
-              </span>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105"
-            >
-              Create Account
-            </button>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-slate-900/50 text-gray-400">Or sign up with</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Github className="w-5 h-5 text-white" />
-              </button>
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Mail className="w-5 h-5 text-white" />
-              </button>
-              <button className="flex justify-center items-center py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-                <Linkedin className="w-5 h-5 text-white" />
-              </button>
-            </div>
-          </div>
-
-          <p className="text-center text-gray-400 text-sm mt-6">
-            Already have an account?{' '}
-            <button onClick={() => setCurrentPage('signin')} className="text-cyan-400 hover:text-cyan-300 font-semibold">
-              Sign in
-            </button>
-          </p>
-        </div>
-
-        <button
-          onClick={() => setCurrentPage('landing')}
-          className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto"
-        >
-          ← Back to home
-        </button>
-      </div>
-    </div>
-  );
+  
 
   // Render based on current page
-  if (currentPage === 'signin') {
-    return <SignInPage />;
-  }
-
-  if (currentPage === 'signup') {
-    return <SignUpPage />;
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setCurrentPage('landing')}>
+            <div className="flex items-center space-x-2 cursor-pointer">
               <div className="bg-gradient-to-r from-cyan-500 to-purple-500 p-2 rounded-lg">
                 <Cpu className="w-6 h-6 text-white" />
               </div>
@@ -323,7 +86,7 @@ const ProductLanding = () => {
               <a href="#features" className="text-white hover:text-cyan-400 transition-colors">Features</a>
               <a href="#about" className="text-white hover:text-cyan-400 transition-colors">About</a>
               <a href="#contact" className="text-white hover:text-cyan-400 transition-colors">Contact</a>
-              <button onClick={() => setCurrentPage('signin')} className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all">
+              <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all">
                 Sign In
               </button>
             </div>
@@ -342,7 +105,7 @@ const ProductLanding = () => {
               <a href="#features" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">Features</a>
               <a href="#about" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">About</a>
               <a href="#contact" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">Contact</a>
-              <button onClick={() => setCurrentPage('signin')} className="w-full mt-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full">
+              <button className="w-full mt-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full">
                 Sign In
               </button>
             </div>
@@ -385,7 +148,7 @@ const ProductLanding = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                <button onClick={() => setCurrentPage('signup')} className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
+                <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
                   Get Started Free
                 </button>
                 <button className="bg-white/10 backdrop-blur-lg border border-white/20 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all">
@@ -552,7 +315,7 @@ const ProductLanding = () => {
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
             Join thousands of engineers who are already advancing their careers with Engineer X
           </p>
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-12 py-5 rounded-full text-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105" onClick={() => setCurrentPage('signup')}>
+          <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-12 py-5 rounded-full text-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
             Sign Up Now - It's Free
           </button>
         </div>
