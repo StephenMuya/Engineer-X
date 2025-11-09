@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowRight, Github, Linkedin, Twitter, Mail, BookOpen, Code, Cpu, Zap, TrendingUp, Users, Sparkles, Rocket, Shield, Brain, Eye, EyeOff } from 'lucide-react';
 
 const ProductLanding = () => {
@@ -62,11 +63,13 @@ const ProductLanding = () => {
     "Career advice and industry best practices"
   ];
 
-  // Sign In Page
-  
-  // Sign Up Page
-  
+  const navigate = useNavigate();
 
+  const handleGetStarted = () => {
+    navigate('/register');
+  };
+
+  
   // Render based on current page
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -148,7 +151,9 @@ const ProductLanding = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
+                <button 
+                  onClick={handleGetStarted}
+                  className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
                   Get Started Free
                 </button>
                 <button className="bg-white/10 backdrop-blur-lg border border-white/20 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all">
