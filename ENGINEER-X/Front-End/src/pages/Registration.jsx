@@ -6,6 +6,12 @@ const AuthPages = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleAuth = () => {
+    navigate('/dashboard');
+  };
+
   const SignInPage = () => (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -72,6 +78,7 @@ const AuthPages = () => {
 
               <button
                 type="button"
+                onClick={handleAuth}
                 className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 transform"
               >
                 Sign In
