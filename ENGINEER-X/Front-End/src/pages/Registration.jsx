@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Cpu, Github, Mail, Linkedin, ArrowLeft } from 'lucide-react';
 
 const AuthPages = () => {
@@ -10,7 +10,7 @@ const AuthPages = () => {
   const navigate = useNavigate();
 
   const handleAuth = () => {
-    navigate('/registration');
+    navigate('/social-feed');
   };
 
   const SignInPage = () => (
@@ -120,10 +120,10 @@ const AuthPages = () => {
             </p>
           </div>
 
-          <button className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto group transition-colors">
+          <Link to="/" className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto group transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to home
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -222,6 +222,7 @@ const AuthPages = () => {
 
               <button
                 type="button"
+                onClick={handleAuth}
                 className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 transform"
               >
                 Create Account
@@ -262,10 +263,10 @@ const AuthPages = () => {
             </p>
           </div>
 
-          <button className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto group transition-colors">
+          <Link to="/" className="mt-6 text-gray-400 hover:text-white flex items-center mx-auto group transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to home
-          </button>
+          </Link>
         </div>
       </div>
     </div>

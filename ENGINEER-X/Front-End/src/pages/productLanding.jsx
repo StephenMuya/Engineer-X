@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Menu, X, ArrowRight, Github, Linkedin, Twitter, Mail, BookOpen, Code, Cpu, Zap, TrendingUp, Users, Sparkles, Rocket, Shield, Brain, Eye, EyeOff } from 'lucide-react';
 
 const ProductLanding = () => {
@@ -108,9 +108,9 @@ const ProductLanding = () => {
               <a href="#features" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">Features</a>
               <a href="#about" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">About</a>
               <a href="#contact" className="block px-3 py-2 text-white hover:bg-slate-800 rounded-md">Contact</a>
-              <button className="w-full mt-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full">
+              <Link to="/registration" className="block text-center w-full mt-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full">
                 Sign In
-              </button>
+              </Link>
             </div>
           </div>
         )}

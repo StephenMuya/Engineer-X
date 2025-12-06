@@ -1,23 +1,10 @@
 import { useRoutes, Link } from 'react-router-dom';
-import appRoutes from './routes/AppRoutes.jsx'
+import appRoutes from './AppRoutes.jsx'
 
 function App() {
     const routing = useRoutes(appRoutes);
 
-    return(
-
-        <>
-        <nav>
-            <Link to='/'></Link>
-            <Link to='/regi'></Link>
-        </nav>
-
-        <main>
-            {routing}
-        </main>
-        
-        </>
-    );
+    return routing;
 }
 
 export default App;

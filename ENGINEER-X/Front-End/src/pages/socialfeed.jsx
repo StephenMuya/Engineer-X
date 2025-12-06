@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Home, TrendingUp, Bell, Mail, User, Search, Image, Code, Smile, MoreHorizontal, Heart, MessageCircle, Repeat2, Share2, Bookmark, UserPlus, Check, X, Cpu, Settings, LogOut, Menu, Send } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SocialFeed = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -26,7 +27,7 @@ const SocialFeed = () => {
       timestamp: '2h ago',
       content: 'Just deployed my first Kubernetes cluster in production! 🚀 The journey from Docker containers to K8s orchestration has been incredible. Here are my top 3 lessons learned...',
       image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80',
-      likes: 234,
+      likes: 756,
       comments: 45,
       reposts: 28,
       tags: ['#Kubernetes', '#DevOps', '#CloudNative']
@@ -102,6 +103,12 @@ const SocialFeed = () => {
     { id: 4, postId: 3, author: 'Nina Patel', username: '@ninap', content: 'RSC changed my development workflow completely', avatar: 'https://i.pravatar.cc/150?img=23' },
     { id: 5, postId: 4, author: 'Mark Davis', username: '@markd', content: 'Would love to see your comparison spreadsheet', avatar: 'https://i.pravatar.cc/150?img=24' }
   ];
+
+  const navigate = useNavigate();
+
+  const handlePostCreation = () => {
+    navigate('/article-editor');
+  };
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -684,9 +691,11 @@ const SocialFeed = () => {
                         <Smile className="w-5 h-5" />
                       </button>
                     </div>
-                    <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all font-semibold">
-                      Post
-                    </button>
+                      <button 
+                        onClick={handlePostCreation}
+                        className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all font-semibold">
+                        Post
+                      </button>
                   </div>
                 </div>
               </div>
