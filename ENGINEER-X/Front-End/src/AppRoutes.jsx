@@ -4,7 +4,9 @@ import Dashboard from './pages/dashboard.jsx';
 import NotFound from './pages/404.jsx';
 import SocialFeed from './pages/socialfeed.jsx';
 import LoginSuccessCard from './pages/loginsucess.jsx';
-import ArticleEditor from 'src/pages/articleditor.jsx'
+import ArticleEditor from './pages/articleditor.jsx'
+import UserProfile from './pages/userprofile.jsx';
+import UserProfileCreated from './pages/userprofilecreated.jsx';
 
 const appRoutes = [
   {
@@ -14,6 +16,14 @@ const appRoutes = [
   {
     path: '/registration',
     element: <Registration />
+  },
+  {
+    path: '/user-profile',
+    element: <UserProfile />
+  },
+  {
+    path: '/user-profile-created',
+    element: <UserProfileCreated />
   },
   {
     path: '/dashboard',

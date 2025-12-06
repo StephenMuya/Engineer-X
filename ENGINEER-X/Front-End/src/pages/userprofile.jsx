@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Cpu, User, Briefcase, Target, Sparkles, CheckCircle, Upload, Github, Linkedin, Twitter, Mail, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const UserProfile = () => {
@@ -97,9 +98,11 @@ const UserProfile = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleComplete = () => {
-    console.log('Profile Setup Complete:', profileData);
-    // Navigate to dashboard
+    navigate('/user-profile-created', profileData);
+    
   };
 
   const StepIndicator = () => (

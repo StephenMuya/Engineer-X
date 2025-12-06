@@ -10,7 +10,7 @@ const AuthPages = () => {
   const navigate = useNavigate();
 
   const handleAuth = () => {
-    navigate('/social-feed');
+    navigate('/user-profile');
   };
 
   const SignInPage = () => (

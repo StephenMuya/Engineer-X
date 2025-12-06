@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import  { useNavigate } from 'react-router-dom';
 import { CheckCircle, Edit, ArrowRight, User, Briefcase, Mail, MapPin, Github, Linkedin, Twitter, Sparkles, Target } from 'lucide-react';
 
 const ProfileCreatedCard = () => {
@@ -18,13 +19,17 @@ const ProfileCreatedCard = () => {
     twitter: 'twitter.com/johndev'
   });
 
+  const navigate = useNavigate();
+
   const handleProceed = () => {
-    console.log('Proceeding to dashboard...');
+    navigate('/dashboard');
   };
 
   const handleEdit = () => {
     console.log('Going back to edit profile...');
   };
+
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
