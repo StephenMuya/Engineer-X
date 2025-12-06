@@ -66,7 +66,7 @@ const ProductLanding = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/register');
+    navigate('/registration');
   };
 
   
@@ -89,9 +89,9 @@ const ProductLanding = () => {
               <a href="#features" className="text-white hover:text-cyan-400 transition-colors">Features</a>
               <a href="#about" className="text-white hover:text-cyan-400 transition-colors">About</a>
               <a href="#contact" className="text-white hover:text-cyan-400 transition-colors">Contact</a>
-              <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all">
+              <Link to="registration" className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all">
                 Sign In
-              </button>
+              </Link>
             </div>
 
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-white">

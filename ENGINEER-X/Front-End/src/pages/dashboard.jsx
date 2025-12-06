@@ -20,7 +20,7 @@ const Dashboard = () => {
       authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
       readTime: "12 min",
       date: "Nov 5, 2025",
-      likes: 234,
+      likes: 300,
       comments: 45,
       isBookmarked: false
     },

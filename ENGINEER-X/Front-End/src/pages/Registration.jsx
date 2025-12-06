@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Cpu, Github, Mail, Linkedin, ArrowLeft } from 'lucide-react';
 
 const AuthPages = () => {
@@ -9,7 +10,7 @@ const AuthPages = () => {
   const navigate = useNavigate();
 
   const handleAuth = () => {
-    navigate('/dashboard');
+    navigate('/registration');
   };
 
   const SignInPage = () => (
