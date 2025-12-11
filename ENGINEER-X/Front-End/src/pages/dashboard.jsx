@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Search, Bell, User, Settings, LogOut, Home, BookOpen, Bookmark, TrendingUp, Menu, X, Heart, MessageCircle, Share2, Clock, Calendar, ChevronRight, Filter, Cpu, Github, Linkedin, Twitter, Mail, Edit } from 'lucide-react';
+import { Search, Bell, User, Settings, LogOut, Home, BookOpen, Bookmark, TrendingUp, Menu, X, Heart, MessageCircle, Share2, Clock, Calendar, ChevronRight, Filter, Cpu, Github, Linkedin, Twitter, Mail, Edit, Bold, Italic, List, Code, Image } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [currentView, setCurrentView] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [newPost, setNewPost] = useState('');
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   const categories = ['All', 'AI/ML', 'Web Development', 'DevOps', 'Cloud', 'Security', 'Tutorials'];
@@ -247,6 +248,12 @@ const Dashboard = () => {
 
             <div className="flex items-center space-x-4">
               <button className="relative text-gray-400 hover:text-white">
+                <Mail className="w-6 h-6" />
+                <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  5
+                </span>
+              </button>
+              <button className="relative text-gray-400 hover:text-white">
                 <Bell className="w-6 h-6" />
                 <span className="absolute -top-1 -right-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   3
@@ -339,6 +346,48 @@ const Dashboard = () => {
         {/* Main Content */}
         <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
+            {/* Create Post */}
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 mb-8">
+              <div className="flex space-x-4">
+                <img 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" 
+                  alt="You" 
+                  className="w-12 h-12 rounded-full border-2 border-cyan-500" 
+                />
+                <div className="flex-1">
+                  <textarea
+                    value={newPost}
+                    onChange={(e) => setNewPost(e.target.value)}
+                    placeholder="What's on your mind, John?"
+                    className="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none resize-none text-lg mb-3"
+                    rows="3"
+                  />
+                  <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                    <div className="flex items-center space-x-1">
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Add image">
+                        <Image className="w-5 h-5" />
+                      </button>
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Bold">
+                        <Bold className="w-5 h-5" />
+                      </button>
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Italic">
+                        <Italic className="w-5 h-5" />
+                      </button>
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Code">
+                        <Code className="w-5 h-5" />
+                      </button>
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="List">
+                        <List className="w-5 h-5" />
+                      </button>
+                    </div>
+                    <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all">
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Header */}
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-white mb-2">
