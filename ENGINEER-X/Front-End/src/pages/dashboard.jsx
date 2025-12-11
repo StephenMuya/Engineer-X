@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Bell, User, Settings, LogOut, Home, BookOpen, Bookmark, TrendingUp, Menu, X, Heart, MessageCircle, Share2, Clock, Calendar, ChevronRight, Filter, Cpu, Github, Linkedin, Twitter, Mail, Edit } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [currentView, setCurrentView] = useState('home');
@@ -223,14 +224,14 @@ const Dashboard = () => {
               <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white lg:hidden">
                 <Menu className="w-6 h-6" />
               </button>
-              <div className="flex items-center space-x-2">
+              <Link to="/" className="flex items-center space-x-2">
                 <div className="bg-gradient-to-r from-cyan-500 to-purple-500 p-2 rounded-lg">
                   <Cpu className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-bold text-white hidden sm:block">
                   Engineer<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">X</span>
                 </span>
-              </div>
+              </Link>
             </div>
 
             <div className="flex-1 max-w-2xl mx-8 hidden md:block">

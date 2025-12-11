@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# IMPORTANT: Replace localhost with your production domain before deploying
+Sitemap: http://localhost:4173/sitemap.xml
