@@ -55,6 +55,8 @@ const NotificationDropdown = () => {
     }
   ]);
 
+
+
   const [isOpen, setIsOpen] = useState(true);
 
   const unreadCount = notifications.filter(n => !n.isRead).length;

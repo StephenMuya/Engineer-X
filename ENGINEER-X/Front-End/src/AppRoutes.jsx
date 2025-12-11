@@ -7,6 +7,8 @@ import LoginSuccessCard from './pages/loginsucess.jsx';
 import ArticleEditor from './pages/articleditor.jsx'
 import UserProfile from './pages/userprofile.jsx';
 import UserProfileCreated from './pages/userprofilecreated.jsx';
+import NotifyDropDown from './pages/notifydropdown.jsx';
+
 
 const appRoutes = [
   {
@@ -44,6 +46,9 @@ const appRoutes = [
   {
     path: '*',
     element: <NotFound />
+  },{
+    path: '/notification',
+    element: <NotifyDropDown /> 
   }
 ]
 

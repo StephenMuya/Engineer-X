@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+
+# Optional: Add your sitemap if you have one
+Sitemap: http://localhost:4173/sitemap.xml
