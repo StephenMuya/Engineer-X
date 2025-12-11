@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { User, Bell, Eye, Palette, Shield, Download, Smartphone, Trash2, Check, AlertCircle, Cpu, Save, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState('account');
   const [showSaveNotification, setShowSaveNotification] = useState(false);
+  const navigate = useNavigate();
   
   const [settings, setSettings] = useState({
     email: 'john.dev@example.com',
@@ -46,7 +48,7 @@ const SettingsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <button className="text-gray-400 hover:text-white">
+              <button onClick={() => navigate('/dashboard')} className="text-gray-400 hover:text-white">
                 <ArrowLeft className="w-6 h-6" />
               </button>
               <div className="flex items-center space-x-2">

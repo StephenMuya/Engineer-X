@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Bell, User, Settings, LogOut, Home, BookOpen, Bookmark, TrendingUp, Menu, X, Heart, MessageCircle, Share2, Clock, Calendar, ChevronRight, Filter, Cpu, Github, Linkedin, Twitter, Mail, Edit, Bold, Italic, List, Code, Image } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Search, Bell, User, Settings, LogOut, Home, BookOpen, Bookmark, TrendingUp, Menu, X, Heart, MessageCircle, Share2, Clock, Calendar, ChevronRight, Filter, Cpu, Github, Linkedin, Twitter, Mail, Edit, Bold, Italic, List, Code, Image, AlertTriangle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [currentView, setCurrentView] = useState('home');
@@ -8,6 +8,26 @@ const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [newPost, setNewPost] = useState('');
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showMessageDropdown, setShowMessageDropdown] = useState(false);
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
+
+  const handleMessageClick = () => {
+    setShowNotificationDropdown(false);
+    setShowMessageDropdown(prev => !prev);
+  };
+
+  const handleNotificationClick = () => {
+    setShowMessageDropdown(false);
+    setShowNotificationDropdown(prev => !prev);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setShowLogoutModal(false);
+    navigate('/');
+  };
 
   const categories = ['All', 'AI/ML', 'Web Development', 'DevOps', 'Cloud', 'Security', 'Tutorials'];
 
@@ -96,6 +116,63 @@ const Dashboard = () => {
       comments: 92,
       isBookmarked: false
     }
+  ];
+
+  const notificationsData = [
+    {
+      id: 1,
+      type: 'like',
+      icon: <Heart className="w-4 h-4 text-red-400" />,
+      title: 'Sarah Chen liked your article',
+      description: 'on "Building Scalable Microservices..."',
+      time: '5m ago',
+      isRead: false,
+    },
+    {
+      id: 2,
+      type: 'comment',
+      icon: <MessageCircle className="w-4 h-4 text-cyan-400" />,
+      title: 'Michael Park commented',
+      description: '"Great insights! Have you tried..."',
+      time: '1h ago',
+      isRead: false,
+    },
+    {
+      id: 3,
+      type: 'follow',
+      icon: <User className="w-4 h-4 text-purple-400" />,
+      title: 'Emily Rodriguez started following you',
+      description: '',
+      time: '3h ago',
+      isRead: true,
+    },
+  ];
+
+  const messagesData = [
+    {
+      id: 1,
+      sender: 'Alex Thompson',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80',
+      message: 'Hey, I had a question about your latest article on Git workflows. Could we chat?',
+      time: '10m ago',
+      isRead: false,
+    },
+    {
+      id: 2,
+      sender: 'Jennifer Liu',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80',
+      message: 'Just read your piece on Zero Trust. Fantastic work!',
+      time: '2h ago',
+      isRead: false,
+    },
+    {
+      id: 3,
+      sender: 'David Kim',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80',
+      message: 'Let\'s sync up about the cloud comparison doc tomorrow.',
+      time: '1d ago',
+      isRead: true,
+    },
   ];
 
   const ProfileModal = () => (
@@ -215,6 +292,79 @@ const Dashboard = () => {
     </div>
   );
 
+  const NotificationDropdown = ({ notifications, onClose }) => (
+    <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-white/10 rounded-xl shadow-2xl z-50">
+      <div className="p-4 border-b border-white/10 flex justify-between items-center">
+        <h3 className="font-semibold text-white">Notifications</h3>
+        <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>
+      </div>
+      <div className="max-h-80 overflow-y-auto">
+        {notifications.map(n => (
+          <div key={n.id} className={`p-3 border-b border-white/5 flex items-start space-x-3 hover:bg-white/5 ${!n.isRead ? 'bg-white/5' : ''}`}>
+            <div className="flex-shrink-0 mt-1">{n.icon}</div>
+            <div className="flex-1">
+              <p className={`text-sm ${!n.isRead ? 'text-white' : 'text-gray-300'}`}>{n.title}</p>
+              <p className="text-xs text-gray-400">{n.description}</p>
+              <p className="text-xs text-gray-500 mt-1">{n.time}</p>
+            </div>
+            {!n.isRead && <div className="w-2 h-2 bg-cyan-400 rounded-full self-center"></div>}
+          </div>
+        ))}
+      </div>
+      <div className="p-2 text-center border-t border-white/10">
+        <button className="text-sm text-cyan-400 hover:underline">View all notifications</button>
+      </div>
+    </div>
+  );
+
+  const MessageDropdown = ({ messages, onClose }) => (
+    <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-white/10 rounded-xl shadow-2xl z-50">
+      <div className="p-4 border-b border-white/10 flex justify-between items-center">
+        <h3 className="font-semibold text-white">Messages</h3>
+        <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>
+      </div>
+      <div className="max-h-80 overflow-y-auto">
+        {messages.map(m => (
+          <div key={m.id} className={`p-3 border-b border-white/5 flex items-start space-x-3 hover:bg-white/5 ${!m.isRead ? 'bg-white/5' : ''}`}>
+            <img src={m.avatar} alt={m.sender} className="w-10 h-10 rounded-full" />
+            <div className="flex-1">
+              <div className="flex justify-between items-baseline">
+                <p className={`text-sm font-semibold ${!m.isRead ? 'text-white' : 'text-gray-300'}`}>{m.sender}</p>
+                <p className="text-xs text-gray-500">{m.time}</p>
+              </div>
+              <p className="text-sm text-gray-400 line-clamp-2">{m.message}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="p-2 text-center border-t border-white/10">
+        <button className="text-sm text-cyan-400 hover:underline">Read more messages</button>
+      </div>
+    </div>
+  );
+
+  const LogoutModal = () => (
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-3xl p-8 max-w-md w-full">
+        <div className="flex justify-center mb-4">
+          <div className="bg-yellow-500/20 p-3 rounded-full border-2 border-yellow-500/50">
+            <AlertTriangle className="w-8 h-8 text-yellow-400" />
+          </div>
+        </div>
+        <h2 className="text-2xl font-bold text-white text-center mb-2">Confirm Logout</h2>
+        <p className="text-gray-300 text-center mb-8">Are you sure you want to log out?</p>
+        <div className="flex space-x-4">
+          <button onClick={() => setShowLogoutModal(false)} className="flex-1 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-lg hover:bg-white/20 transition-all font-semibold">
+            Cancel
+          </button>
+          <button onClick={handleLogout} className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg hover:shadow-pink-500/50 transition-all font-semibold">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Top Navigation */}
@@ -247,19 +397,25 @@ const Dashboard = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <button className="relative text-gray-400 hover:text-white">
-                <Mail className="w-6 h-6" />
-                <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  5
-                </span>
-              </button>
-              <button className="relative text-gray-400 hover:text-white">
-                <Bell className="w-6 h-6" />
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  3
-                </span>
-              </button>
-              <button onClick={() => setShowProfileModal(true)} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+              <div className="relative">
+                <button onClick={handleMessageClick} className="relative text-gray-400 hover:text-white">
+                  <Mail className="w-6 h-6" />
+                  <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    2
+                  </span>
+                </button>
+                {showMessageDropdown && <MessageDropdown messages={messagesData} onClose={() => setShowMessageDropdown(false)} />}
+              </div>
+              <div className="relative">
+                <button onClick={handleNotificationClick} className="relative text-gray-400 hover:text-white">
+                  <Bell className="w-6 h-6" />
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    2
+                  </span>
+                </button>
+                {showNotificationDropdown && <NotificationDropdown notifications={notificationsData} onClose={() => setShowNotificationDropdown(false)} />}
+              </div>
+              <button onClick={() => { setShowProfileModal(true); setShowMessageDropdown(false); setShowNotificationDropdown(false); }} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                 <img 
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"
                   alt="Profile"
@@ -312,10 +468,13 @@ const Dashboard = () => {
                   <User className="w-5 h-5" />
                   <span className="font-medium">Profile</span>
                 </button>
-                <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all">
+                <Link 
+                  to="/settings"
+                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all"
+                >
                   <Settings className="w-5 h-5" />
                   <span className="font-medium">Settings</span>
-                </button>
+                </Link>
               </nav>
             </div>
 
@@ -336,7 +495,10 @@ const Dashboard = () => {
               </nav>
             </div>
 
-            <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all">
+            <button 
+              onClick={() => setShowLogoutModal(true)}
+              className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all"
+            >
               <LogOut className="w-5 h-5" />
               <span className="font-medium">Logout</span>
             </button>
@@ -498,6 +660,7 @@ const Dashboard = () => {
       </div>
 
       {showProfileModal && <ProfileModal />}
+      {showLogoutModal && <LogoutModal />}
     </div>
   );
 };
