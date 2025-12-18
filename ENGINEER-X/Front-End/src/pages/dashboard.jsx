@@ -180,8 +180,8 @@ const Dashboard = () => {
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-white">My Profile</h2>
-          <button onClick={() => setShowProfileModal(false)} className="text-gray-400 hover:text-white">
-            <X className="w-6 h-6" />
+          <button onClick={() => setShowProfileModal(false)} className="text-gray-400 hover:text-white" aria-label="Close profile" type="button">
+            <X className="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
 
@@ -189,8 +189,11 @@ const Dashboard = () => {
           <div className="flex items-center space-x-6">
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80"
+                src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80".includes('images.unsplash.com') ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&fm=webp&auto=compress&q=60" : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80"}
                 alt="Profile"
+                width="96"
+                height="96"
+                loading="eager"
                 className="w-24 h-24 rounded-full border-4 border-cyan-500"
               />
               <button className="absolute bottom-0 right-0 bg-gradient-to-r from-cyan-500 to-purple-500 p-2 rounded-full">
@@ -283,7 +286,7 @@ const Dashboard = () => {
             <button className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all">
               Save Changes
             </button>
-            <button onClick={() => setShowProfileModal(false)} className="px-6 bg-white/10 text-white py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
+            <button onClick={() => setShowProfileModal(false)} className="px-6 bg-white/10 text-white py-3 rounded-xl font-semibold hover:bg-white/20 transition-all" type="button" aria-label="Cancel profile changes">
               Cancel
             </button>
           </div>
@@ -296,7 +299,7 @@ const Dashboard = () => {
     <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-white/10 rounded-xl shadow-2xl z-50">
       <div className="p-4 border-b border-white/10 flex justify-between items-center">
         <h3 className="font-semibold text-white">Notifications</h3>
-        <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>
+        <button onClick={onClose} className="text-gray-400 hover:text-white" aria-label="Close messages" type="button"><X className="w-4 h-4" aria-hidden="true" /></button>
       </div>
       <div className="max-h-80 overflow-y-auto">
         {notifications.map(n => (
@@ -321,12 +324,12 @@ const Dashboard = () => {
     <div className="absolute right-0 mt-2 w-80 bg-slate-800 border border-white/10 rounded-xl shadow-2xl z-50">
       <div className="p-4 border-b border-white/10 flex justify-between items-center">
         <h3 className="font-semibold text-white">Messages</h3>
-        <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>
+        <button onClick={onClose} className="text-gray-400 hover:text-white" aria-label="Close notifications" type="button"><X className="w-4 h-4" aria-hidden="true" /></button>
       </div>
-      <div className="max-h-80 overflow-y-auto">
+            <div className="max-h-80 overflow-y-auto">
         {messages.map(m => (
           <div key={m.id} className={`p-3 border-b border-white/5 flex items-start space-x-3 hover:bg-white/5 ${!m.isRead ? 'bg-white/5' : ''}`}>
-            <img src={m.avatar} alt={m.sender} className="w-10 h-10 rounded-full" />
+            <img src={m.avatar && m.avatar.includes('images.unsplash.com') ? `${m.avatar}&fm=webp&q=60&auto=compress` : m.avatar} alt={m.sender} width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full" />
             <div className="flex-1">
               <div className="flex justify-between items-baseline">
                 <p className={`text-sm font-semibold ${!m.isRead ? 'text-white' : 'text-gray-300'}`}>{m.sender}</p>
@@ -398,7 +401,7 @@ const Dashboard = () => {
 
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <button onClick={handleMessageClick} className="relative text-gray-400 hover:text-white">
+                <button onClick={handleMessageClick} className="relative text-gray-400 hover:text-white" aria-label="Open messages" aria-expanded={showMessageDropdown} type="button">
                   <Mail className="w-6 h-6" />
                   <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                     2
@@ -407,7 +410,7 @@ const Dashboard = () => {
                 {showMessageDropdown && <MessageDropdown messages={messagesData} onClose={() => setShowMessageDropdown(false)} />}
               </div>
               <div className="relative">
-                <button onClick={handleNotificationClick} className="relative text-gray-400 hover:text-white">
+                <button onClick={handleNotificationClick} className="relative text-gray-400 hover:text-white" aria-label="Open notifications" aria-expanded={showNotificationDropdown} type="button">
                   <Bell className="w-6 h-6" />
                   <span className="absolute -top-1 -right-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                     2
@@ -415,10 +418,13 @@ const Dashboard = () => {
                 </button>
                 {showNotificationDropdown && <NotificationDropdown notifications={notificationsData} onClose={() => setShowNotificationDropdown(false)} />}
               </div>
-              <button onClick={() => { setShowProfileModal(true); setShowMessageDropdown(false); setShowNotificationDropdown(false); }} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+              <button onClick={() => { setShowProfileModal(true); setShowMessageDropdown(false); setShowNotificationDropdown(false); }} className="flex items-center space-x-2 hover:opacity-80 transition-opacity" aria-label="Open profile" type="button">
                 <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"
+                  src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80".includes('images.unsplash.com') ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80&fm=webp&auto=compress&q=60" : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"}
                   alt="Profile"
+                  width="32"
+                  height="32"
+                  loading="eager"
                   className="w-8 h-8 rounded-full border-2 border-cyan-500"
                 />
               </button>
@@ -439,6 +445,7 @@ const Dashboard = () => {
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                     currentView === 'home' ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border border-cyan-500/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'
                   }`}
+                type="button"
                 >
                   <Home className="w-5 h-5" />
                   <span className="font-medium">Home</span>
@@ -448,6 +455,7 @@ const Dashboard = () => {
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                     currentView === 'trending' ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border border-cyan-500/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'
                   }`}
+                type="button"
                 >
                   <TrendingUp className="w-5 h-5" />
                   <span className="font-medium">Trending</span>
@@ -457,6 +465,7 @@ const Dashboard = () => {
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                     currentView === 'bookmarks' ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border border-cyan-500/50' : 'text-gray-400 hover:bg-white/5 hover:text-white'
                   }`}
+                type="button"
                 >
                   <Bookmark className="w-5 h-5" />
                   <span className="font-medium">Bookmarks</span>
@@ -465,6 +474,8 @@ const Dashboard = () => {
                   onClick={() => setShowProfileModal(true)}
                   className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all"
                 >
+                type="button"
+                
                   <User className="w-5 h-5" />
                   <span className="font-medium">Profile</span>
                 </button>
@@ -498,6 +509,8 @@ const Dashboard = () => {
             <button 
               onClick={() => setShowLogoutModal(true)}
               className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all"
+              aria-label="Logout"
+              type="button"
             >
               <LogOut className="w-5 h-5" />
               <span className="font-medium">Logout</span>
@@ -512,8 +525,11 @@ const Dashboard = () => {
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 mb-8">
               <div className="flex space-x-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" 
+                  src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80".includes('images.unsplash.com') ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80&fm=webp&auto=compress&q=60" : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80"} 
                   alt="You" 
+                  width="48"
+                  height="48"
+                  loading="lazy"
                   className="w-12 h-12 rounded-full border-2 border-cyan-500" 
                 />
                 <div className="flex-1">
@@ -526,20 +542,20 @@ const Dashboard = () => {
                   />
                   <div className="flex items-center justify-between pt-3 border-t border-white/10">
                     <div className="flex items-center space-x-1">
-                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Add image">
-                        <Image className="w-5 h-5" />
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Add image" aria-label="Add image" type="button">
+                        <Image className="w-5 h-5" aria-hidden="true" />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Bold">
-                        <Bold className="w-5 h-5" />
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Bold" aria-label="Bold" type="button">
+                        <Bold className="w-5 h-5" aria-hidden="true" />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Italic">
-                        <Italic className="w-5 h-5" />
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Italic" aria-label="Italic" type="button">
+                        <Italic className="w-5 h-5" aria-hidden="true" />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Code">
-                        <Code className="w-5 h-5" />
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="Code" aria-label="Code" type="button">
+                        <Code className="w-5 h-5" aria-hidden="true" />
                       </button>
-                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="List">
-                        <List className="w-5 h-5" />
+                      <button className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-white/10 rounded-lg transition-all" title="List" aria-label="List" type="button">
+                        <List className="w-5 h-5" aria-hidden="true" />
                       </button>
                     </div>
                     <button className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all">
@@ -589,12 +605,16 @@ const Dashboard = () => {
 
             {/* Articles Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {articles.map((article) => (
+              {articles.map((article, idx) => (
                 <div key={article.id} className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all group">
                   <div className="relative h-48 overflow-hidden">
                     <img 
-                      src={article.image}
+                      src={article.image && article.image.includes('images.unsplash.com') ? `${article.image}&fm=webp&q=60&auto=compress` : article.image}
                       alt={article.title}
+                      width="800"
+                      height="300"
+                      loading={idx === 0 ? 'eager' : 'lazy'}
+                      fetchPriority={idx === 0 ? 'high' : 'low'}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3">
@@ -602,16 +622,19 @@ const Dashboard = () => {
                         {article.category}
                       </span>
                     </div>
-                    <button className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm p-2 rounded-full hover:bg-black/70 transition-all">
-                      <Bookmark className={`w-4 h-4 ${article.isBookmarked ? 'text-cyan-400 fill-cyan-400' : 'text-white'}`} />
+                    <button className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm p-2 rounded-full hover:bg-black/70 transition-all" aria-label={article.isBookmarked ? 'Remove bookmark' : 'Add bookmark'} type="button" aria-pressed={article.isBookmarked}>
+                      <Bookmark className={`w-4 h-4 ${article.isBookmarked ? 'text-cyan-400 fill-cyan-400' : 'text-white'}`} aria-hidden="true" />
                     </button>
                   </div>
 
                   <div className="p-6">
                     <div className="flex items-center space-x-2 mb-3">
                       <img 
-                        src={article.authorAvatar}
+                        src={article.authorAvatar && article.authorAvatar.includes('images.unsplash.com') ? `${article.authorAvatar}&fm=webp&q=60&auto=compress` : article.authorAvatar}
                         alt={article.author}
+                        width="32"
+                        height="32"
+                        loading="lazy"
                         className="w-8 h-8 rounded-full"
                       />
                       <div className="flex-1 min-w-0">
@@ -633,23 +656,23 @@ const Dashboard = () => {
 
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div className="flex items-center space-x-4">
-                        <button className="flex items-center space-x-1 text-gray-400 hover:text-red-400 transition-colors">
-                          <Heart className="w-4 h-4" />
+                        <button className="flex items-center space-x-1 text-gray-400 hover:text-red-400 transition-colors" aria-label={`Like ${article.title}`} type="button">
+                          <Heart className="w-4 h-4" aria-hidden="true" />
                           <span className="text-sm">{article.likes}</span>
                         </button>
-                        <button className="flex items-center space-x-1 text-gray-400 hover:text-cyan-400 transition-colors">
-                          <MessageCircle className="w-4 h-4" />
+                        <button className="flex items-center space-x-1 text-gray-400 hover:text-cyan-400 transition-colors" aria-label={`Comment on ${article.title}`} type="button">
+                          <MessageCircle className="w-4 h-4" aria-hidden="true" />
                           <span className="text-sm">{article.comments}</span>
                         </button>
                       </div>
-                      <button className="text-gray-400 hover:text-white transition-colors">
-                        <Share2 className="w-4 h-4" />
+                      <button className="text-gray-400 hover:text-white transition-colors" aria-label={`Share ${article.title}`} type="button">
+                        <Share2 className="w-4 h-4" aria-hidden="true" />
                       </button>
                     </div>
 
-                    <button className="w-full mt-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-400 py-2 rounded-xl font-semibold hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-purple-500/20 transition-all flex items-center justify-center space-x-2">
+                    <button className="w-full mt-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-400 py-2 rounded-xl font-semibold hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-purple-500/20 transition-all flex items-center justify-center space-x-2" aria-label={`Read ${article.title}`} type="button">
                       <span>Read Article</span>
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-4 h-4" aria-hidden="true" />
                     </button>
                   </div>
                 </div>

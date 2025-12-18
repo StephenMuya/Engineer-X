@@ -8,6 +8,7 @@ import ArticleEditor from './pages/articleditor.jsx'
 import UserProfile from './pages/userprofile.jsx';
 import UserProfileCreated from './pages/userprofilecreated.jsx';
 import NotifyDropDown from './pages/notifydropdown.jsx';
+import Settings from './pages/settings.jsx';
 
 
 const appRoutes = [
@@ -42,6 +43,10 @@ const appRoutes = [
   {
     path: '/article-editor',
     element: <ArticleEditor />
+  },
+  {
+    path: '/settings',
+    element: <Settings />
   },
   {
     path: '*',
